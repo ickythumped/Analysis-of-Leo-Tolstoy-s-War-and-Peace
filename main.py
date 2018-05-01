@@ -4,6 +4,8 @@ Created on Tue May  1 02:37:13 2018
 
 @author: Gaurav Roy
 """
+import pandas as pd
+import nltk
 
 filename = "apple_file.txt"
 body = "body_of_text.txt"
