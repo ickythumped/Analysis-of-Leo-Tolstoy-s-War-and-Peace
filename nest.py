@@ -21,7 +21,6 @@ pattern_chapter = "CHAPTER"
 regex_book = r'\s+(.*?)\s+'
 regex_chapter = r'\s+(.*?)\s+'
 regex_lastitem = r'\s+(.*)$'
-#regex_para = r'()
 
 #%% List Declarations
 book_content = []
@@ -54,46 +53,32 @@ with open(filename, "r", encoding="UTF8") as file:
 counter = 0
 for x in range(0,len(list_books)-1):           
     regex1 = re.compile(list_books[x] + regex_book + list_books[x+1])
-    #print(regex1)
     book_content.append(re.findall(regex1, data))
     current_count = book_content[x][0].count("CHAPTER")
-    #print(current_count)
     
-    for y in range(counter, counter + current_count-1):
-        #print (list_chapters[y+1])
-        
+    for y in range(counter, counter + current_count-1):        
         regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
-        #print(regex2)
         chapter_content.append(re.findall(regex2, book_content[x][0]))
 
 ## Last chapters
     regex3 = re.compile(list_chapters[y+1] + regex_lastitem)
-    #print(regex3)
     chapter_content.append(re.findall(regex3, book_content[x][0]))    
     counter = counter + current_count
-    #print(count)
 
 #%% Creating content for last book    
 regex4 = re.compile(list_books[x+1] + regex_lastitem)
-    #print(regex1)
 book_content.append(re.findall(regex4, data))
 current_count = book_content[x+1][0].count("CHAPTER")
-#print(current_count)
     
-for y in range(counter, counter + current_count-1):
-    #print (list_chapters[y+1])
-        
+for y in range(counter, counter + current_count-1):        
     regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
-    #print(regex2)
     chapter_content.append(re.findall(regex2, book_content[x+1][0]))
 
 ## Last Chapter
 regex3 = re.compile(list_chapters[y+1] + regex_lastitem) #need to change regular expression
-#print(regex3)
 chapter_content.append(re.findall(regex3, book_content[x+1][0]))    
 counter = counter + current_count
-#print(count)
-    
+  
 #%%
 for w in range(0, len(chapter_content)):
     chapter_paras.append(chapter_content[w][0].split("  "))
@@ -108,7 +93,9 @@ for u in para_sentences:
     for v in range(0, len(u)):
         sentence_words.append(wordonly_tokenizer.tokenize(u[v]))
         
-#%%    Creating dictionaries
+#%% Creating dictionaries
+
+## Creating word dictionary
 word_dict = defaultdict(dict)  
 for i, sentence in enumerate(sentence_words):
     tempdict1 = {}
@@ -116,6 +103,7 @@ for i, sentence in enumerate(sentence_words):
         tempdict1[j+1] = sentence[j]
     word_dict[i+1] = tempdict1   
 
+## Creating sentence and para dictionaries
 sentence_dict= defaultdict(list)
 para_dict = defaultdict()
 sequence = count(start = 1, step = 1)
@@ -125,6 +113,8 @@ for k in range(0, len(para_sentences)):
         sentence_dict.setdefault(m+1, []).append(para_sentences[k][m])
         sentence_dict.setdefault(m+1, []).append(word_dict[next(sequence)])
     para_dict[k+1] = sentence_dict
+
+## Creating chapter dictionaries
 
 
 
