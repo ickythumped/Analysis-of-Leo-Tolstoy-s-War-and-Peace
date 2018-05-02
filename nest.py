@@ -16,6 +16,7 @@ pattern_chapter = "CHAPTER"
 
 regex_book = r'(.*?)'
 regex_chapter = r'(.*?)'
+regex_lastchapter = r'\s+(.*)$'
 #regex_para = r'()
 
 book_content = []
@@ -44,7 +45,7 @@ for x in range(0,len(list_books)-1):
     #print(regex1)
     book_content.append(re.findall(regex1, data))
     current_count = book_content[x][0].count("CHAPTER")
-    print(current_count)
+    #print(current_count)
     
     for y in range(count, count + current_count-1):
         #print (list_chapters[y+1])
@@ -53,20 +54,21 @@ for x in range(0,len(list_books)-1):
         #print(regex2)
         chapter_content.append(re.findall(regex2, book_content[x][0]))
 
-    regex3 = re.compile(list_chapters[y+1] + regex_chapter) #need to change regular expression
+    regex3 = re.compile(list_chapters[y+1] + regex_lastchapter) #need to change regular expression
+    print(regex3)
     chapter_content.append(re.findall(regex3, book_content[x][0]))    
     count = count + current_count
-    print(count)
+    #print(count)
     
 for w in range(0, len(chapter_content)):
     chapter_paras.append(chapter_content[w][0].split("  "))
 
     
 for s in range(0, len(chapter_paras)):
-    print(chapter_paras[s])
+    #print(chapter_paras[s])
     for t in range(0, len(chapter_paras[s])):
-        print(chapter_paras[s][t])
+        #print(chapter_paras[s][t])
 #        for u in range(t.count('.')):
-        #para_sentences.append(sent_tokenize(chapter_paras[s][t][0]))
+        para_sentences.append(sent_tokenize(chapter_paras[s][t]))
         
     
