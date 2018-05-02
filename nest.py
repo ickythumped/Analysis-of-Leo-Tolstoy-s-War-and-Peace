@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  1 11:02:51 2018
+Created on Tue May  1 23:05:06 2018
 
 @author: Gaurav Roy
 """
+
 import re
 from collections import defaultdict
 from collections import OrderedDict
@@ -11,9 +12,13 @@ from collections import OrderedDict
 filename = "body_of_text.txt"
 pattern_book = "BOOK"
 pattern_chapter = "CHAPTER"
+
 regex_book = r'(.*?)'
 regex_chapter = r'(.*?)'
+#regex_para = r'()
 
+book_content = []
+chapter_content = []
 list_words = []
 list_books = []
 list_chapters = []
@@ -33,21 +38,20 @@ with open(filename, "r", encoding="UTF8") as file:
             
 count=0
 for x in range(0,len(list_books)-1):           
-    regex = re.compile(list_books[x] + regex_book + list_books[x+1])
-    #print(regex)
-    content = re.findall(regex, data)
-    current_count=content[0].count("CHAPTER")
+    regex1 = re.compile(list_books[x] + regex_book + list_books[x+1])
+    #print(regex1)
+    book_content.append(re.findall(regex1, data))
+    current_count = book_content[x][0].count("CHAPTER")
     print(current_count)
-    for y in range(count,count+current_count-1):
+    
+    for y in range(count, count + current_count-1):
         #print (list_chapters[y+1])
-        regex = re.compile(list_chapters[y]+regex_chapter+list_chapters[y+1])
-        para = re.findall(regex, content[0])
-        #print(para)
-        #print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         
-    count=count+current_count
-    print(count)      
-                
-             
+        regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
+        print(regex2)
+        chapter_content.append(re.findall(regex2, book_content[x][0]))
 
-   
+    regex3 = re.compile(list_chapters[y+1] + regex_chapter)
+    chapter_content.append(re.findall(regex3, book_content[x][0]))    
+    count = count + current_count
+    print(count)  
