@@ -8,6 +8,7 @@ Created on Tue May  1 23:05:06 2018
 import re
 from collections import defaultdict
 from collections import OrderedDict
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 filename = "body_of_text.txt"
 pattern_book = "BOOK"
@@ -19,12 +20,13 @@ regex_chapter = r'(.*?)'
 
 book_content = []
 chapter_content = []
+chapter_paras = []
+para_sentences = []
+para_content = []
 list_words = []
 list_books = []
 list_chapters = []
-#count=0
-
-#            
+          
 with open(filename, "r", encoding="UTF8") as file:
     data = file.read().replace('\n', ' ')
             
@@ -36,7 +38,7 @@ with open(filename, "r", encoding="UTF8") as file:
         if re.match(pattern_chapter, l):
             list_chapters.append(l.strip('\n'))
             
-count=0
+count = 0
 for x in range(0,len(list_books)-1):           
     regex1 = re.compile(list_books[x] + regex_book + list_books[x+1])
     #print(regex1)
@@ -48,10 +50,23 @@ for x in range(0,len(list_books)-1):
         #print (list_chapters[y+1])
         
         regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
-        print(regex2)
+        #print(regex2)
         chapter_content.append(re.findall(regex2, book_content[x][0]))
 
-    regex3 = re.compile(list_chapters[y+1] + regex_chapter)
+    regex3 = re.compile(list_chapters[y+1] + regex_chapter) #need to change regular expression
     chapter_content.append(re.findall(regex3, book_content[x][0]))    
     count = count + current_count
-    print(count)  
+    print(count)
+    
+for w in range(0, len(chapter_content)):
+    chapter_paras.append(chapter_content[w][0].split("  "))
+
+    
+for s in range(0, len(chapter_paras)):
+    print(chapter_paras[s])
+    for t in range(0, len(chapter_paras[s])):
+        print(chapter_paras[s][t])
+#        for u in range(t.count('.')):
+        #para_sentences.append(sent_tokenize(chapter_paras[s][t][0]))
+        
+    
