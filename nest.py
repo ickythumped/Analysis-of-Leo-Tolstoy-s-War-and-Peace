@@ -32,9 +32,7 @@ para_content = []
 list_words = []
 list_books = []
 list_chapters = []
-
-tempdict1 = {}
-          
+    
 #%% Reading File / list of book titles / list of chapter titles
 with open(filename, "r", encoding="UTF8") as file:
     data = file.read().replace('\n', ' ')
@@ -112,9 +110,25 @@ for u in para_sentences:
     for v in range(0, len(u)):
         sentence_words.append(wordonly_tokenizer.tokenize(u[v]))
         
-#%%    
-
+#%%    Creating dictionaries
+word_dict = {}  
 for i, sentence in enumerate(sentence_words):
+    tempdict1 = {}
     for j in range(0, len(sentence)):
-        tempdict1[j] = sentence[i][j]
+        tempdict1[j+1] = sentence[j]
+    word_dict[i+1] = tempdict1   
+
+sentence_dict= {}
+for k in range(0, len(para_sentences)):
+    tempdict2 = {}
+    for l+1, sen in enumerate(para):
+        tempdict2.setdefault(l+1, []).append(sen)
+        tempdict2.setdefault(l+1, []).append()
+
+
+
+
+
+
+
         
