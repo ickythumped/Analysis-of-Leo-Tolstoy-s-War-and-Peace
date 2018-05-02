@@ -79,7 +79,7 @@ regex3 = re.compile(list_chapters[y+1] + regex_lastitem) #need to change regular
 chapter_content.append(re.findall(regex3, book_content[x+1][0]))    
 counter = counter + current_count
   
-#%%
+#%% Creating paras, sentences and words lists
 for w in range(0, len(chapter_content)):
     chapter_paras.append(chapter_content[w][0].split("  "))
 
