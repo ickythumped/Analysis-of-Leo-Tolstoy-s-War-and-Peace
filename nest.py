@@ -9,6 +9,7 @@ import re
 from collections import defaultdict
 from collections import OrderedDict
 from nltk.tokenize import sent_tokenize, word_tokenize, RegexpTokenizer
+from itertools import count
 
 #%% Strings
 filename = "body_of_text.txt"
@@ -50,7 +51,7 @@ with open(filename, "r", encoding="UTF8") as file:
             list_chapters.append(l.strip('\n'))
 
 #%%  Creating content lists of books, chapters        
-count = 0
+counter = 0
 for x in range(0,len(list_books)-1):           
     regex1 = re.compile(list_books[x] + regex_book + list_books[x+1])
     #print(regex1)
@@ -58,7 +59,7 @@ for x in range(0,len(list_books)-1):
     current_count = book_content[x][0].count("CHAPTER")
     #print(current_count)
     
-    for y in range(count, count + current_count-1):
+    for y in range(counter, counter + current_count-1):
         #print (list_chapters[y+1])
         
         regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
@@ -69,7 +70,7 @@ for x in range(0,len(list_books)-1):
     regex3 = re.compile(list_chapters[y+1] + regex_lastitem)
     #print(regex3)
     chapter_content.append(re.findall(regex3, book_content[x][0]))    
-    count = count + current_count
+    counter = counter + current_count
     #print(count)
 
 #%% Creating content for last book    
@@ -79,7 +80,7 @@ book_content.append(re.findall(regex4, data))
 current_count = book_content[x+1][0].count("CHAPTER")
 #print(current_count)
     
-for y in range(count, count + current_count-1):
+for y in range(counter, counter + current_count-1):
     #print (list_chapters[y+1])
         
     regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
@@ -90,7 +91,7 @@ for y in range(count, count + current_count-1):
 regex3 = re.compile(list_chapters[y+1] + regex_lastitem) #need to change regular expression
 #print(regex3)
 chapter_content.append(re.findall(regex3, book_content[x+1][0]))    
-count = count + current_count
+counter = counter + current_count
 #print(count)
     
 #%%
@@ -99,10 +100,7 @@ for w in range(0, len(chapter_content)):
 
     
 for s in range(0, len(chapter_paras)):
-    #print(chapter_paras[s])
     for t in range(0, len(chapter_paras[s])):
-        #print(chapter_paras[s][t])
-#        for u in range(t.count('.')):
         para_sentences.append(sent_tokenize(chapter_paras[s][t]))
 
 wordonly_tokenizer = RegexpTokenizer(r'\w+')        
@@ -111,20 +109,22 @@ for u in para_sentences:
         sentence_words.append(wordonly_tokenizer.tokenize(u[v]))
         
 #%%    Creating dictionaries
-word_dict = {}  
+word_dict = defaultdict(dict)  
 for i, sentence in enumerate(sentence_words):
     tempdict1 = {}
     for j in range(0, len(sentence)):
         tempdict1[j+1] = sentence[j]
     word_dict[i+1] = tempdict1   
 
-sentence_dict= {}
+sentence_dict= defaultdict(list)
+para_dict = defaultdict()
+sequence = count(start = 1, step = 1)
 for k in range(0, len(para_sentences)):
     tempdict2 = {}
-    for l+1, sen in enumerate(para):
-        tempdict2.setdefault(l+1, []).append(sen)
-        tempdict2.setdefault(l+1, []).append()
-
+    for m in range(0, len(para_sentences[k])):
+        sentence_dict.setdefault(m+1, []).append(para_sentences[k][m])
+        sentence_dict.setdefault(m+1, []).append(word_dict[next(sequence)])
+    para_dict[k+1] = sentence_dict
 
 
 
