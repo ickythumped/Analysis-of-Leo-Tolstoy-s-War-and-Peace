@@ -4,7 +4,7 @@ Created on Thu May  3 00:09:58 2018
 
 @author: Gaurav Roy
 """
-#%%
+#%% Imports
 from nest import nested_structure
 import json
 
