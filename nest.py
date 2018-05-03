@@ -83,7 +83,7 @@ def nested_structure():
         chapter_content.append(re.findall(regex2, book_content[x+1][0]))
     
     ## Last Chapter
-    regex3 = re.compile(list_chapters[y+1] + regex_lastitem) #need to change regular expression
+    regex3 = re.compile(list_chapters[y+1] + regex_lastitem)
     chapter_content.append(re.findall(regex3, book_content[x+1][0]))    
     counter = counter + current_count
       
