@@ -21,4 +21,4 @@ try:
             if flag == 1:
                 file2.write(line)   
 except IOError:
-        print ("File already exists")
+        print (body, "file already exists")

@@ -11,7 +11,6 @@ import re
 #from collections import OrderedDict
 from nltk.tokenize import sent_tokenize, RegexpTokenizer
 from itertools import count
-import json
 #import pandas as pd
 
 #%% FUNCTION
@@ -145,14 +144,7 @@ def nested_structure():
         for r in range(0, chapter_count[q]):
             tempdict3[r+1] = chapter_dict[next(sequence3)]
         dictionary_books[q+1] = tempdict3
-    
-    
-    ## Creating serialized JSON file
-    try:
-        with open('serialized_corpus.json', 'x') as fp:
-            json.dump(dictionary_books, fp)
-    except IOError:
-        print ("File already exists")
 
-#%% RETURN
+    #%% RETURN
     return(dictionary_books)
+    
