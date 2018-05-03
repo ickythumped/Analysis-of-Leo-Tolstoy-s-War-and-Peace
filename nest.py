@@ -14,7 +14,7 @@ from itertools import count
 import json
 #import pandas as pd
 
-
+#%% FUNCTION
 def nested_structure():
     #%% Strings
     
@@ -135,9 +135,9 @@ def nested_structure():
         chapter_dict[n+1] =  tempdict2
         
     
-    #%% Final Nested Structure
+    #%% FINAL NESTED STRUCTURE
     
-    ## Creating book dictionaries
+    ## Creating dictionary of books
     dictionary_books = {}
     sequence3 = count(start = 1, step = 1)
     for q in range(0, len(list_books)):
@@ -154,5 +154,5 @@ def nested_structure():
     except IOError:
         print ("File already exists")
 
-#%%
+#%% RETURN
     return(dictionary_books)
