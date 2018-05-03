@@ -8,7 +8,7 @@ Created on Tue May  1 23:05:06 2018
 
 import re
 #from collections import defaultdict
-#from collections import OrderedDict
+from collections import OrderedDict
 from nltk.tokenize import sent_tokenize, RegexpTokenizer
 from itertools import count
 #import pandas as pd
@@ -106,44 +106,48 @@ def nested_structure():
     #%% Creating dictionaries
     
     ## Creating word dictionary
-    word_dict = {}  
+    word_dict = OrderedDict()
+    word = "Word: "
     for i, sen in enumerate(sentence_words):
-        tempdict1 = {}
+        tempdict1 = OrderedDict()
         for j in range(0, len(sen)):
-            tempdict1[j+1] = sen[j]
-        
-        word_dict[i+1] = tempdict1   
+            tempdict1[word + str(j+1)] = sen[j]
+        word_dict[str(i+1)] = tempdict1   
     
     ## Creating sentence and para dictionaries
-    para_dict = {}
+    para_dict = OrderedDict()
+    sentence = "Sentence: "
+    para = "Paragraph: "
     sequence1 = count(start = 1, step = 1)
     for k in range(0, len(para_sentences)):
-        sentence_dict= {}
+        sentence_dict= OrderedDict()
         for m in range(0, len(para_sentences[k])):
-            sentence_dict.setdefault(m+1, []).append(para_sentences[k][m])
-            sentence_dict.setdefault(m+1, []).append(word_dict[next(sequence1)])
-        para_dict[k+1] = sentence_dict
+            sentence_dict.setdefault(sentence + str(m+1), []).append(para_sentences[k][m])
+            sentence_dict.setdefault(sentence + str(m+1), []).append(word_dict[str(next(sequence1))])
+        para_dict[para + str(k+1)] = sentence_dict
     
     ## Creating chapter dictionaries
-    chapter_dict = {}
+    chapter_dict = OrderedDict()
+    chapter = "Chapter: "
     sequence2 = count(start = 1, step = 1)
     for n in range(0, len(chapter_paras)):
-        tempdict2 = {}
+        tempdict2 = OrderedDict()
         for p in range(0, len(chapter_paras[n])):
-            tempdict2[p+1] = para_dict[next(sequence2)]
-        chapter_dict[n+1] =  tempdict2
+            tempdict2[para + str(p+1)] = para_dict[para + str(next(sequence2))]
+        chapter_dict[chapter + str(n+1)] =  tempdict2
         
     
     #%% FINAL NESTED STRUCTURE
     
     ## Creating dictionary of books
-    dictionary_books = {}
+    dictionary_books = OrderedDict()
+    book = "Book: "
     sequence3 = count(start = 1, step = 1)
     for q in range(0, len(list_books)):
-        tempdict3 = {}
+        tempdict3 = OrderedDict()
         for r in range(0, chapter_count[q]):
-            tempdict3[r+1] = chapter_dict[next(sequence3)]
-        dictionary_books[q+1] = tempdict3
+            tempdict3[chapter + str(r+1)] = chapter_dict[chapter + str(next(sequence3))]
+        dictionary_books[book + str(q+1)] = tempdict3
 
     #%% RETURN
     return(dictionary_books)
