@@ -10,9 +10,9 @@ from nest import nested_structure
 import re
 
 #%% Function to convert dict to list
-def listof_sentences(dict):
+def listof_sentences(dictofbook):
     listof_sentn = []
-    for chapter in dict.values():
+    for chapter in dictofbook.values():
         for para in chapter.values():
             for sentn in para.values():
                 for sentence in sentn.values():
