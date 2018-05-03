@@ -7,10 +7,12 @@ Created on Tue May  1 23:05:06 2018
 #%% Imports
 
 import re
-from collections import defaultdict
-from collections import OrderedDict
+#from collections import defaultdict
+#from collections import OrderedDict
 from nltk.tokenize import sent_tokenize, word_tokenize, RegexpTokenizer
 from itertools import count
+import json
+import pandas as pd
 
 #%% Strings
 
@@ -32,9 +34,9 @@ chapter_paras = []
 para_sentences = []
 sentence_words = []
 para_content = []
-list_words = []
 list_books = []
 list_chapters = []
+chapter_count = []
     
 #%% Reading File / list of book titles / list of chapter titles
 
@@ -54,13 +56,12 @@ with open(filename, "r", encoding="UTF8") as file:
             list_chapters.append(l.strip('\n'))
 
 #%%  Creating content lists of books, chapters
-
 counter = 0
 for x in range(0,len(list_books)-1):           
     regex1 = re.compile(list_books[x] + regex_book + list_books[x+1])
     book_content.append(re.findall(regex1, data))
     current_count = book_content[x][0].count("CHAPTER")
-    
+    chapter_count.append(current_count)
     for y in range(counter, counter + current_count-1):        
         regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
         chapter_content.append(re.findall(regex2, book_content[x][0]))
@@ -75,7 +76,7 @@ for x in range(0,len(list_books)-1):
 regex4 = re.compile(list_books[x+1] + regex_lastitem)
 book_content.append(re.findall(regex4, data))
 current_count = book_content[x+1][0].count("CHAPTER")
-    
+chapter_count.append(current_count)    
 for y in range(counter, counter + current_count-1):        
     regex2 = re.compile(list_chapters[y] + regex_chapter + list_chapters[y+1])
     chapter_content.append(re.findall(regex2, book_content[x+1][0]))
@@ -131,3 +132,28 @@ for n in range(0, len(chapter_paras)):
     for p in range(0, len(chapter_paras[n])):
         tempdict2[p+1] = para_dict[next(sequence2)]
     chapter_dict[n+1] =  tempdict2
+    
+
+#%% Final Nested Structure
+
+## Creating book dictionaries
+dictionary_books = {}
+sequence3 = count(start = 1, step = 1)
+for q in range(0, len(list_books)):
+    tempdict3 = {}
+    for r in range(0, chapter_count[q]):
+        tempdict3[r+1] = chapter_dict[next(sequence3)]
+    dictionary_books[q+1] = tempdict3
+
+
+## Creating serialized JSON file
+try:
+    with open('serialized_corpus.json', 'x') as fp:
+        json.dump(dictionary_books, fp)
+except IOError:
+    print ("File already exists")
+
+
+df = pd.DataFrame(dictionary_books)
+
+#%%             
