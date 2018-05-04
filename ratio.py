@@ -41,6 +41,3 @@ def ratio_speech():
     print("Ratio of direct speech to indirect speech is:")
     print("{0:.2f}".format(ratio))
     return(ratio)
-    
-#%%    
-ratio = ratio_speech()
