@@ -33,10 +33,8 @@ for book, chapter in dict_book.items():
     book_list.append(wordsin_chapter)
 
 #%% Converting to dataframe
-chapter_names = []
 df = pd.DataFrame(book_list, index = book_names)
-for column in range(0, len(df.columns)):
-    chapter_names.append("Chapter " + str(column+1))
+chapter_names = ["Chapter "+ str(column+1) for column in range(0, len(df.columns))]
 df.columns = chapter_names
 
 #%% Visualization of length of books and chapters
