@@ -38,7 +38,7 @@ chapter_names = ["Chapter "+ str(column+1) for column in range(0, len(df.columns
 df.columns = chapter_names
 
 #%% Visualization of length of books and chapters
-ttl = "Length (word count) of chapters in books"
+ttl = "Length (word count) of chapters and books"
 ax = df.plot(kind = 'barh', stacked = True, figsize = (40, 20))
 ax.set_title(ttl, fontsize = 65)
 ax.set_xlabel("Number of words", fontsize = 40, style = "oblique")

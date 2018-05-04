@@ -5,8 +5,8 @@ Created on Thu May  3 19:09:56 2018
 @author: Gaurav Roy
 """
 #%% Run for first time
-import nltk
-nltk.download('wordnet')
+#import nltk
+#nltk.download('wordnet')
 
 #%% Imports
 from nest import nested_structure
@@ -53,6 +53,8 @@ words_lemmatized = [lemmatizer.lemmatize(wl) for wl in words_lemmatized_adv]
 # Dictionary of word count   
 wordcount = FreqDist(wl.lower() for wl in words_lemmatized)
 mostcommon = FreqDist(wl.lower() for wl in words_lemmatized).most_common(50)
+
+print("Word counts for the 10 most occurring words are: ")
 wordcount.tabulate(10)
 
 #%% Word count plot
