@@ -5,8 +5,8 @@ Created on Thu May  3 19:09:56 2018
 @author: Gaurav Roy
 """
 #%% Run for first time
-#import nltk
-#nltk.download('wordnet')
+import nltk
+nltk.download('wordnet')
 
 #%% Imports
 from nest import nested_structure
@@ -15,6 +15,7 @@ from nltk.tokenize import  RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.probability import FreqDist
+from matplotlib import pyplot as plt
 
 #%% Retrieving data
 dict_books = nested_structure()
@@ -50,8 +51,21 @@ words_lemmatized_adv = [lemmatizer.lemmatize(wadv, 'r') for wadv in words_lemmat
 words_lemmatized = [lemmatizer.lemmatize(wl) for wl in words_lemmatized_adv]
  
 # Dictionary of word count   
-table_wordcount = FreqDist(wl.lower() for wl in words_lemmatized)
-    
+wordcount = FreqDist(wl.lower() for wl in words_lemmatized)
+mostcommon = FreqDist(wl.lower() for wl in words_lemmatized).most_common(50)
+wordcount.tabulate(10)
 
+#%% Word count plot
+
+ttl = "Word Count for Top 50 Words" 
+plt.figure(figsize = (40, 20))
+wordcount.plot(50)
+plt.title(ttl, fontsize = 40)
+plt.xlabel("Words", fontsize = 26, style = "oblique")
+plt.ylabel("Counts", fontsize = 26, style = "oblique")
+ax = plt.gca()
+ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 20})
+yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 35000, 4000]
+ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
 
     
