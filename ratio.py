@@ -11,18 +11,20 @@ import re
 
 #%% Function to convert dict to list
 def listof_sentences(dictofbook):
-#    listof_sentn = []
     
     listof_s = [sentence[0] for chapter in dictofbook.values() for para in chapter.values() for sentn \
                 in para.values() for sentence in sentn.values()]
     
+    return(listof_s)
+    
+#    listof_sentn = []    
 #    for chapter in dictofbook.values():
 #        for para in chapter.values():
 #            for sentn in para.values():
 #                for sentence in sentn.values():
 #                    listof_sentn.append(sentence[0])
 #    return(listof_sentn)
-    return(listof_s)
+
 
 #%% Function for calculating Ratio of Direct speech to Indirect speech
 def ratio_speech():
