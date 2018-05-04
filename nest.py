@@ -86,7 +86,7 @@ def nested_structure():
     #%% Creating paras, sentences and words lists
     
     ## Creating chapter of paras list
-    chapter_paras = [chapter_content[w][0].split(" ") for w in range(0, len(chapter_content))]
+    chapter_paras = [chapter_content[w][0].split("  ") for w in range(0, len(chapter_content))]
 #    chapter_paras = []
 #    for w in range(0, len(chapter_content)):
 #        chapter_paras.append(chapter_content[w][0].split("  "))
