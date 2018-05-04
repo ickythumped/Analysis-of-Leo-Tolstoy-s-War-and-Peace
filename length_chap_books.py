@@ -13,7 +13,6 @@ from itertools import count
 
 
 #%% Initializations
-dict_book = OrderedDict()
 dict_book = nested_structure()
 book_names = [] 
 book_list = []
