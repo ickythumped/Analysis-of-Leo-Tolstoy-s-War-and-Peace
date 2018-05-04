@@ -8,7 +8,6 @@ Created on Thu May  3 10:56:45 2018
 #%% Imports
 import pandas as pd
 from nest import nested_structure
-from collections import OrderedDict
 from itertools import count
 
 
