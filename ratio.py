@@ -38,6 +38,8 @@ def ratio_speech():
     
     ratio = direct_speech/indirect_speech
     
+    print("Number of direct speech sentences: ")
+    print(direct_speech)
     print("Ratio of direct speech to indirect speech is:")
     print("{0:.2f}".format(ratio))
     return(ratio)
