@@ -9,6 +9,8 @@ Created on Thu May  3 19:09:56 2018
 #nltk.download('wordnet')
 
 #%% Imports
+import sys, os
+import csv
 from nest import nested_structure
 from ratio import listof_sentences
 from nltk.tokenize import  RegexpTokenizer
@@ -56,16 +58,28 @@ words_lemmatized_adj = [lemmatizer.lemmatize(wadj, 'a') for wadj in words_lemmat
 words_lemmatized_adv = [lemmatizer.lemmatize(wadv, 'r') for wadv in words_lemmatized_adj]
 #noun lemmatization
 words_lemmatized = [lemmatizer.lemmatize(wl) for wl in words_lemmatized_adv]
+
  
-# Dictionary of word count   
+#%% Dictionary of word count   
 wordcount = FreqDist(wc for wc in words_lemmatized)
-mostcommon = FreqDist(wc for wc in words_lemmatized).most_common(50)
 
 print("Word counts for the 10 most occurring words are: ")
-wordcount.tabulate(10)
+
+# Suppress console temporarily
+sys.stdout = open(os.devnull, "w")
+wordcount.tabulate()
+sys.stdout = sys.__stdout__
+
+# Write to table (csv file)
+file_freqtable = "fdist.csv"
+try:
+    with open(file_freqtable, "x") as fp:
+        writer = csv.writer(fp)
+        writer.writerows(wordcount.items())
+except IOError:
+    print (file_freqtable, "File already exists")
 
 #%% Word count plot
-
 ttl = "Word Count for Top 50 Words" 
 plt.figure(figsize = (40, 20))
 wordcount.plot(75)
@@ -76,19 +90,20 @@ ax = plt.gca()
 ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 20})
 yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 35000, 4000]
 ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
-
+plt.show()
 
 #%% Word cloud
 
-WC_height = 500
-WC_width = 1000
+WC_height = 800
+WC_width = 1600
 WC_max_words = 500
 
 wordCloud = WordCloud(max_words=WC_max_words, height=WC_height, width=WC_width)
  
-print("\nWord cloud with most frequently occurring words (unigrams).")
+# Plotting Word cloud with most frequently occurring words (unigrams)
 wordCloud.generate_from_frequencies(wordcount)
-plt.title('Most frequently occurring words (unigrams)')
+plt.figure(figsize = (36, 18))
+plt.title('Most frequently occurring words (unigrams)', fontsize = 40)
 plt.imshow(wordCloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()    
