@@ -68,7 +68,7 @@ wordcount.tabulate(10)
 
 ttl = "Word Count for Top 50 Words" 
 plt.figure(figsize = (40, 20))
-wordcount.plot(100)
+wordcount.plot(75)
 plt.title(ttl, fontsize = 40)
 #plt.xlabel("Words", fontsize = 26, style = "oblique")
 plt.ylabel("Counts", fontsize = 26, style = "oblique")
