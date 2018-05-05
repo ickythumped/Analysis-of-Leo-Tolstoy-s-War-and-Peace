@@ -4,9 +4,6 @@ Created on Thu May  3 19:09:56 2018
 
 @author: Gaurav Roy
 """
-#%% Run for first time
-#import nltk
-#nltk.download('wordnet')
 
 #%% Imports
 import sys, os
@@ -71,7 +68,7 @@ wordcount.tabulate()
 sys.stdout = sys.__stdout__
 
 # Write to table (csv file)
-file_freqtable = "fdist.csv"
+file_freqtable = "word_freq.csv"
 try:
     with open(file_freqtable, "x") as fp:
         writer = csv.writer(fp)
@@ -93,7 +90,6 @@ ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
 plt.show()
 
 #%% Word cloud
-
 WC_height = 800
 WC_width = 1600
 WC_max_words = 500
