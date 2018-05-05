@@ -10,9 +10,9 @@ import json
 
 #%% Creating serialized JSON file
 dict_book = nested_structure()
-file = 'serialized_corpus.json'
+file_json = 'serialized_corpus.json'
 try:
-    with open(file, 'x') as fp:
+    with open(file_json, 'x') as fp:
         json.dump(dict_book, fp)
 except IOError:
-    print (file, "File already exists")
+    print (file_json, "File already exists")
