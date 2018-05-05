@@ -16,6 +16,8 @@ from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.probability import FreqDist
 from matplotlib import pyplot as plt
+from wordcloud import WordCloud
+from addStopWords import add_stopwords
 
 #%% Retrieving data
 dict_books = nested_structure()
@@ -29,9 +31,14 @@ words_sentences = [wordonly_tokenizer.tokenize(sentence) for sentence in list_se
 # List of list of words
 words_list = [word for element in words_sentences for word in element]
 
+# All lowercase
+words_lower = [wlo.lower() for wlo in words_list]
+
 # Removing stopwords
-stopWords = set(stopwords.words('english'))   
-words_filtered = [w for w in words_list if w not in stopWords]
+manual_SW = add_stopwords()
+fullset_SW = stopwords.words('english') + manual_SW
+stopWords = set(fullset_SW)   
+words_filtered = [w for w in words_lower if w not in stopWords]
 
 # Removing single letter words
 words_letter = [wle for wle in words_filtered if len(wle) > 1]     
@@ -51,8 +58,8 @@ words_lemmatized_adv = [lemmatizer.lemmatize(wadv, 'r') for wadv in words_lemmat
 words_lemmatized = [lemmatizer.lemmatize(wl) for wl in words_lemmatized_adv]
  
 # Dictionary of word count   
-wordcount = FreqDist(wl.lower() for wl in words_lemmatized)
-mostcommon = FreqDist(wl.lower() for wl in words_lemmatized).most_common(50)
+wordcount = FreqDist(wc for wc in words_lemmatized)
+mostcommon = FreqDist(wc for wc in words_lemmatized).most_common(50)
 
 print("Word counts for the 10 most occurring words are: ")
 wordcount.tabulate(10)
@@ -61,13 +68,27 @@ wordcount.tabulate(10)
 
 ttl = "Word Count for Top 50 Words" 
 plt.figure(figsize = (40, 20))
-wordcount.plot(50)
+wordcount.plot(100)
 plt.title(ttl, fontsize = 40)
-plt.xlabel("Words", fontsize = 26, style = "oblique")
+#plt.xlabel("Words", fontsize = 26, style = "oblique")
 plt.ylabel("Counts", fontsize = 26, style = "oblique")
 ax = plt.gca()
 ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 20})
 yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 35000, 4000]
 ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
 
-    
+
+#%% Word cloud
+
+WC_height = 500
+WC_width = 1000
+WC_max_words = 500
+
+wordCloud = WordCloud(max_words=WC_max_words, height=WC_height, width=WC_width)
+ 
+print("\nWord cloud with most frequently occurring words (unigrams).")
+wordCloud.generate_from_frequencies(wordcount)
+plt.title('Most frequently occurring words (unigrams)')
+plt.imshow(wordCloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()    
