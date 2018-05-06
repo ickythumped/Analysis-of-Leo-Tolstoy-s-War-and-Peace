@@ -9,6 +9,8 @@ Created on Thu May  3 10:56:45 2018
 import pandas as pd
 from nest import nested_structure
 from itertools import count
+import plotly as py
+import cufflinks as cf
 
 
 #%% Initializations
@@ -33,17 +35,23 @@ for book, chapter in dict_book.items():
     book_list.append(wordsin_chapter)
 
 #%% Converting to dataframe
+
+cf.set_config_file(offline=True, world_readable=True, theme='ggplot')
+
 df = pd.DataFrame(book_list, index = book_names)
 chapter_names = ["Chapter "+ str(column+1) for column in range(0, len(df.columns))]
 df.columns = chapter_names
+#df = cf.datagen.lines()
 
 #%% Visualization of length of books and chapters
 ttl = "Length (word count) of chapters and books"
+#py.offline.plot_barh(df, barmode = 'stack', filename='cufflinks/barh')
 ax = df.plot(kind = 'barh', stacked = True, figsize = (40, 20))
 ax.set_title(ttl, fontsize = 65)
 ax.set_xlabel("Number of words", fontsize = 40, style = "oblique")
 ax.set_ylabel("Books", fontsize = 40, style = "oblique")
-ax.legend(loc = "best", ncol = 6, prop = {'size' : 16})
 xticks = [0, 10000, 20000, 30000, 40000, 50000, 60000, 70000]
 ax.set_xticklabels(xticks, fontdict = {'fontsize' : 30})
 ax.set_yticklabels(ax.get_yticklabels() ,fontdict = {'fontsize' : 30})
+handles, labels = ax.get_legend_handles_labels()
+ax.legend(handles, labels, loc = "best", ncol = 6, prop = {'size' : 16})
