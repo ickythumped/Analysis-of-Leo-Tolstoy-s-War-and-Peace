@@ -5,14 +5,18 @@ Created on Thu May  3 00:09:58 2018
 @author: Gaurav Roy
 """
 #%% Imports
-from nest import nested_structure
 import json
 
 #%% Creating serialized JSON file
-dict_book = nested_structure()
-file_json = 'serialized_corpus.json'
-try:
-    with open(file_json, 'x') as fp:
-        json.dump(dict_book, fp)
-except IOError:
-    print (file_json, "File already exists")
+def serializeData(dict_book):
+    file_json = 'serialized_corpus.json'
+    try:
+        with open(file_json, 'x') as fp:
+            json.dump(dict_book, fp)
+            
+        print(file_json, "file is created")
+        print("\n -----------------------------------------------\n")
+    
+    except IOError:
+        print(file_json, "file already exists")
+        print("\n -----------------------------------------------\n")

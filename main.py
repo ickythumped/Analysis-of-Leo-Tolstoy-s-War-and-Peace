@@ -4,20 +4,28 @@ Created on Tue May  1 02:37:13 2018
 
 @author: Gaurav Roy
 """
-import pandas as pd
-import nltk
+from body_parser import parseBody
+from nest import nestedStructure
+from serialized_json import serializeData
+from ratio import ratioSpeech
+from length_chap_books import bookLength
+from word_count import wordFreqAnalysis
 
-filename = "apple_file.txt"
-body = "body_of_text.txt"
-parser_start = "BOOK ONE: 1805\n"
-parser_end = "End of the Project Gutenberg EBook of War and Peace, by Leo Tolstoy\n"
-flag = 0
+file1 = 'apple_file.txt'
+file2 = 'body_of_text.txt'
+parseBody(file1, file2)
 
-with open(filename, "r", encoding="UTF8") as file1, open(body, "x", encoding="UTF8") as file2:
-    for line in file1:
-        if line == parser_start:
-            flag = 1
-        if line == parser_end:
-            break
-        if flag == 1:
-            file2.write(line)
+#%% Creating nested structure
+dict_books = nestedStructure(file2)
+
+#%% Creating serialized file
+serializeData(dict_books)
+
+#%% Calculating ratio of direct to indirect speech
+ratioSpeech(dict_books)
+
+#%% Visualizing books and chapters length
+bookLength(dict_books)
+
+#%% Performing Word Freq Analysis
+wordFreqAnalysis(dict_books)

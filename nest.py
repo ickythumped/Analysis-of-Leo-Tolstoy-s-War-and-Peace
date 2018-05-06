@@ -14,10 +14,10 @@ from itertools import count
 #import pandas as pd
 
 #%% FUNCTION
-def nested_structure():
+def nestedStructure(file):
     #%% Strings
     
-    filename = "body_of_text.txt"
+    filename = file
     pattern_book = "BOOK"
     pattern_epilogue1 = "FIRST EPILOGUE"
     pattern_epilogue2 = "SECOND EPILOGUE"
