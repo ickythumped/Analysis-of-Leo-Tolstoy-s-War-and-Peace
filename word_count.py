@@ -19,8 +19,8 @@ from addStopWords import add_stopwords
 
 #%% Function for Word Frequency Analysis
 def wordFreqAnalysis(dict_books):
-    #%% Retrieving data
     
+    #%% Retrieving data
     list_sentences = listof_sentences(dict_books)
     
     #%% NLP
