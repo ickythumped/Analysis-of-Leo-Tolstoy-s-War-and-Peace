@@ -41,18 +41,19 @@ def ratioSpeech(dict_books):
         indirect_speech = len(list_sentences) - direct_speech
         ratio = direct_speech/indirect_speech
         ratios.append(ratio)
-
-        if index == 0:
+    
+    for ix, elem in enumerate(ratios):
+        if ix == 0:
             print("Number of direct speech sentences in total is: %s", direct_speech)
             #print(direct_speech)
-            print("Ratio of direct speech to indirect speech in total is: ", "{0:.2f}".format(ratios[index]))
+            print("Ratio of direct speech to indirect speech in total is: ", "{0:.2f}".format(ratios[ix]))
             #print("{0:.2f}".format(ratio))
     
             print("\n -----------------------------------------------\n")            
         else:
-            print("Number of direct speech sentences in Chapter %s is: %s", str(index), direct_speech)
+            print("Number of direct speech sentences in Chapter %s is: %s", str(ix), direct_speech)
             #print(direct_speech)
-            print("Ratio of direct speech to indirect speech in Chapter %s is: ", str(index), "{0:.2f}".format(ratios[index]))
+            print("Ratio of direct speech to indirect speech in Chapter %s is: ", str(ix), "{0:.2f}".format(ratios[ix]))
             #print("{0:.2f}".format(ratio))
     
             print("\n -----------------------------------------------\n")
