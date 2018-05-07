@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May  2 20:30:42 2018
+File contains the following functions:
+    
+    listof_sentences() --> Converts OrderedDict() to a whole list of sentences
+    
+    listof_chapsent() --> Converts OrderedDict() to a list of sentences book-wise
+    
+    ratioSpeech() --> 1. Calculates ratio of direct to indirect speech of each book
+                      2. Calulcates overall ratio of direct to indirect speech in corpus
+                      3. Plots the ratios in a bar plot
 
 @author: Gaurav Roy
 """
 
 #%% Imports
 import re
+import matplotlib.pyplot as plt
+import numpy as np
 
 #%% Function to convert dict to list of sentences
 def listof_sentences(dict_books):
@@ -69,10 +79,25 @@ def ratioSpeech(dict_books):
           (total_ratio))
     print("\n -----------------------------------------------\n")
     
-    ratios_list = ratios
-    ratios_list.append(total_ratio)
     
+    book_names = [1, 2, 3, 4, 5, 6, 7, 8, \
+                  9, 10, 11, 12, 13, 14, 15,\
+                  16, 17]
     
-    return(ratios_list)
+    fig, ax = plt.subplots(figsize = (40, 20))
+    plt.bar(book_names, ratios, width = 0.3)
+    ax.set_title("Ratios of Direct to Indirect Speech for all Books", fontsize = 65)
+    ax.set_xlabel("Book Number", fontsize = 40, style = "oblique")
+    ax.set_ylabel("Ratio", fontsize = 40, style = "oblique")
+    ax.set_yticklabels(ax.get_yticks() ,fontdict = {'fontsize' : 30})
+    plt.xticks(np.arange(min(book_names), max(book_names)+1, 1.0))
+    #ax.set_xticklabels(book_names, fontdict = {'fontsize' : 23, 'fontweight' : 'bold'})
+    ax.tick_params('x', labelsize = 25)
+    ax.axhline(total_ratio, color="black")
+    ax.text(0.71, 0.67, " Overall ratio = 0.43", fontsize = 30, fontweight = 'bold',\
+            va='center', ha="left",\
+            bbox=dict(facecolor="w",alpha=0.5), transform=ax.transAxes)
+    
+
     
     

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  3 19:09:56 2018
-
-@author: Gaurav Roy
+File contains the following functions:
+    wordFreqAnalysis() --> 1. Generates a frequency count of words present in the text.
+                           2. Writes table of frequency count to csv file 'word_freq.csv'
+                           3. Generates a Freq Dist plot of the top 50 common words
+                           4. Generates a Word Cloud of the top 500 words
 """
 
 #%% Imports

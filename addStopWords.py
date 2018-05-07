@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May  5 14:13:24 2018
-
-@author: Gaurav Roy
+File contains the following function:
+    add_stopwords() --> Returns a list of manually set stop words
+    
 """
 def add_stopwords():
     stopwordsList = []

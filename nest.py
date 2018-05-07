@@ -1,17 +1,28 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  1 23:05:06 2018
-
-@author: Gaurav Roy
+File contains the following functions:
+    nestedStructure() --> Parses and stores the text in a OrderedDict in the following structure:
+                            {Books:
+                                {Chapters:
+                                    {Paragraphs:
+                                        {Sentences:
+                                            Sentences[]
+                                            {Words:
+                                                Word
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        
+                          Returns OrderedDict()
 """
 #%% Imports
 
 import re
-#from collections import defaultdict
 from collections import OrderedDict
 from nltk.tokenize import sent_tokenize, RegexpTokenizer
 from itertools import count
-#import pandas as pd
 
 #%% FUNCTION
 def nestedStructure(file):

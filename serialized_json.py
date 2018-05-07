@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  3 00:09:58 2018
-
-@author: Gaurav Roy
+File contains the following functions:
+    serializeData() --> writes OrderedDict to JSON file 'serialized_corpus.json' 
 """
 #%% Imports
 import json

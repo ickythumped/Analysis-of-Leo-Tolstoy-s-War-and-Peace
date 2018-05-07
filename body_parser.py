@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  1 10:57:20 2018
+File contains the following functions: 
+    parseBody() --> 1. Parses the Original text file and retains only the Body
+                    2. Writes retained Body to a text file 'body_of_text.txt'
 
-@author: Gaurav Roy
 """
 
 def parseBody(original, parsed):

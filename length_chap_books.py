@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  3 10:56:45 2018
 
-@author: Gaurav Roy
+File contains the following function:
+    bookLength() --> Returns a stacked horizontal bar plot of the length of Books and
+                     Chapters according to word count
+
+
 """
 
 #%% Imports
