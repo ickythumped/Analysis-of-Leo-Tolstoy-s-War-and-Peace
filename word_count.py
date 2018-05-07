@@ -6,7 +6,6 @@ Created on Thu May  3 19:09:56 2018
 """
 
 #%% Imports
-import sys, os
 import csv
 from ratio import listof_sentences
 from nltk.tokenize import  RegexpTokenizer
@@ -90,8 +89,8 @@ def wordFreqAnalysis(dict_books):
     plt.ylabel("Frequency of Words", fontsize = 38, style = "oblique")
     ax = plt.gca()
     ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 30})
-    #yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
-    #ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
+    #yticks = [400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]
+    ax.set_yticklabels(ax.get_yticks(), fontdict = {'fontsize' : 30})
     plt.show()
     
     #%% Word cloud

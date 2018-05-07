@@ -33,20 +33,23 @@ def listof_chapsent(dict_books):
 def ratioSpeech(dict_books):
     list_chapsentences = listof_chapsent(dict_books)
     ratios = []
+    direct_speech = []
+    indirect_speech = []
     for index, element in enumerate(list_chapsentences):
         material = str(element)               
         regex = r'“(.*?)”'
         direct_speech_list = re.findall(regex, material)
-        direct_speech = len(direct_speech_list)
-        indirect_speech = len(element) - direct_speech
-        ratio = direct_speech/indirect_speech
+        direct_speech.append(len(direct_speech_list))
+        indirect_speech.append(len(element) - direct_speech[index])
+        ratio = direct_speech[index]/indirect_speech[index]
         ratios.append(ratio)
     
     for ix, elem in enumerate(ratios):
-            print("Number of direct speech sentences in Chapter " ,str(ix), "is ", direct_speech)
+            print("Number of direct speech sentences in Book" ,str(ix+1), "is", direct_speech[ix])
             #print(direct_speech)
-            print("Ratio of direct speech to indirect speech in Chapter ", str(ix), "is: ", "{0:.2f}".format\
-                  (ratios[ix]))
+            print("Number of indirect speech sentences in Book" ,str(ix+1), "is", indirect_speech[ix])
+            print("Ratio of direct speech to indirect speech in Book", str(ix+1), "is:", "{0:.2f}".format\
+                  (elem))
             #print("{0:.2f}".format(ratio))
     
             print("\n -----------------------------------------------\n")
@@ -60,8 +63,16 @@ def ratioSpeech(dict_books):
     total_ratio = direct_speech/indirect_speech
     
     
-    print("Number of direct speech sentences in total is ", direct_speech)
-    print("Ratio of direct speech to indirect speech in Chapter ", str(ix), "is: ", "{0:.2f}".format\
+    print("Number of direct speech sentences in entire corpus is", direct_speech)
+    print("Number of indirect speech sentences in entire corpus is", indirect_speech)
+    print("Ratio of direct speech to indirect speech in entire corpus is:", "{0:.2f}".format\
           (total_ratio))
-    ratios_list = ratios + list(total_ratio)
+    print("\n -----------------------------------------------\n")
+    
+    ratios_list = ratios
+    ratios_list.append(total_ratio)
+    
+    
     return(ratios_list)
+    
+    

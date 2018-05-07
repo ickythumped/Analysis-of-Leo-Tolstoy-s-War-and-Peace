@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  1 02:37:13 2018
+RUN THIS FILE
 
-@author: Gaurav Roy
+CHANGE FILENAME TO apple_file.txt
 """
 from body_parser import parseBody
 from nest import nestedStructure
@@ -22,7 +22,7 @@ dict_books = nestedStructure(file2)
 serializeData(dict_books)
 
 #%% Calculating ratio of direct to indirect speech
-ratioSpeech(dict_books)
+Ratios = ratioSpeech(dict_books)
 
 #%% Visualizing books and chapters length
 bookLength(dict_books)

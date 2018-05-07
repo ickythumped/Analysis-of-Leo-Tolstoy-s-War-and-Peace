@@ -8,13 +8,14 @@ Created on Thu May  3 10:56:45 2018
 #%% Imports
 import pandas as pd
 #from itertools import count
-import plotly as py
-import cufflinks as cf
+import matplotlib.pyplot as plt
 
 
 #%% Function for visualization of length of books and chapters
 def bookLength(dict_book):
     
+    print("Plotting length of books and chapters")
+    print("\n -----------------------------------------------\n")
     #%% Initializations
     book_names = [] 
     book_list = []
@@ -36,21 +37,14 @@ def bookLength(dict_book):
         book_list.append(wordsin_chapter)
     
     #%% Converting to dataframe
-    
-    cf.set_config_file(offline=True, world_readable=True, theme='ggplot')
-    
+   
     df = pd.DataFrame(book_list, index = book_names)
     chapter_names = ["Chapter "+ str(column+1) for column in range(0, len(df.columns))]
     df.columns = chapter_names
-    #df = cf.datagen.lines()
     
-    #%% Visualization of length of books and chapters
-    print("Plotting length of books and chapters")
-    print("\n -----------------------------------------------\n")
-    
+    #%% Visualization of length of books and chapters    
     
     ttl = "Length (word count) of chapters and books"
-    #py.offline.plot_barh(df, barmode = 'stack', filename='cufflinks/barh')
     ax = df.plot(kind = 'barh', stacked = True, figsize = (40, 20))
     ax.set_title(ttl, fontsize = 65)
     ax.set_xlabel("Number of words", fontsize = 40, style = "oblique")
