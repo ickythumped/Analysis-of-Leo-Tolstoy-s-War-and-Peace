@@ -90,8 +90,8 @@ def wordFreqAnalysis(dict_books):
     plt.ylabel("Frequency of Words", fontsize = 38, style = "oblique")
     ax = plt.gca()
     ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 30})
-    yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
-    ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
+    #yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+    #ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
     plt.show()
     
     #%% Word cloud
