@@ -31,32 +31,37 @@ def listof_chapsent(dict_books):
         
 #%% Function for calculating Ratio of Direct speech to Indirect speech
 def ratioSpeech(dict_books):
-    list_sentences = listof_sentences(dict_books)
+    list_chapsentences = listof_chapsent(dict_books)
     ratios = []
-    for index, element in enumerate(list_sentences):
+    for index, element in enumerate(list_chapsentences):
         material = str(element)               
         regex = r'“(.*?)”'
         direct_speech_list = re.findall(regex, material)
         direct_speech = len(direct_speech_list)
-        indirect_speech = len(list_sentences) - direct_speech
+        indirect_speech = len(element) - direct_speech
         ratio = direct_speech/indirect_speech
         ratios.append(ratio)
     
     for ix, elem in enumerate(ratios):
-        if ix == 0:
-            print("Number of direct speech sentences in total is: %s", direct_speech)
+            print("Number of direct speech sentences in Chapter " ,str(ix), "is ", direct_speech)
             #print(direct_speech)
-            print("Ratio of direct speech to indirect speech in total is: ", "{0:.2f}".format(ratios[ix]))
-            #print("{0:.2f}".format(ratio))
-    
-            print("\n -----------------------------------------------\n")            
-        else:
-            print("Number of direct speech sentences in Chapter %s is: %s", str(ix), direct_speech)
-            #print(direct_speech)
-            print("Ratio of direct speech to indirect speech in Chapter %s is: ", str(ix), "{0:.2f}".format(ratios[ix]))
+            print("Ratio of direct speech to indirect speech in Chapter ", str(ix), "is: ", "{0:.2f}".format\
+                  (ratios[ix]))
             #print("{0:.2f}".format(ratio))
     
             print("\n -----------------------------------------------\n")
     
+    list_sentences = listof_sentences(dict_books)
+    material = str(list_sentences)               
+    regex = r'“(.*?)”'
+    direct_speech_list = re.findall(regex, material)
+    direct_speech = len(direct_speech_list)
+    indirect_speech = len(list_sentences) - direct_speech
+    total_ratio = direct_speech/indirect_speech
     
-    return(ratios)
+    
+    print("Number of direct speech sentences in total is ", direct_speech)
+    print("Ratio of direct speech to indirect speech in Chapter ", str(ix), "is: ", "{0:.2f}".format\
+          (total_ratio))
+    ratios_list = ratios + list(total_ratio)
+    return(ratios_list)
