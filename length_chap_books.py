@@ -10,9 +10,6 @@ File contains the following function:
 
 #%% Imports
 import pandas as pd
-#from itertools import count
-import matplotlib.pyplot as plt
-
 
 #%% Function for visualization of length of books and chapters
 def bookLength(dict_book):
