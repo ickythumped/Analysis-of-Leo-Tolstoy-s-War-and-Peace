@@ -40,8 +40,8 @@ def ratioSpeech(dict_books):
         direct_speech_list = re.findall(regex, material)
         direct_speech = len(direct_speech_list)
         indirect_speech = len(list_sentences) - direct_speech
-        
-        ratios[index] = direct_speech/indirect_speech
+        ratio = direct_speech/indirect_speech
+        ratios.append(ratio)
 
         if index == 0:
             print("Number of direct speech sentences in total is: %s", direct_speech)
