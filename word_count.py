@@ -83,7 +83,7 @@ def wordFreqAnalysis(dict_books):
     print("Plotting Word Count")
     print("\n -----------------------------------------------\n")
     
-    ttl = "Word Count for Top 50 Words" 
+    ttl = "Word Frequency for Top 50 Words" 
     plt.figure(figsize = (40, 20))
     wordcount.plot(50)
     plt.title(ttl, fontsize = 80)
