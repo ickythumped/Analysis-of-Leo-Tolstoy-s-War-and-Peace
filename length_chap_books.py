@@ -21,7 +21,6 @@ def bookLength(dict_book):
     book_list = []
     
     #%% Extracting word lists for books and chapters
-    #sequence2 = count(start = 0, step = 1)
     for book, chapter in dict_book.items():
         book_names.append(book)
         counter1 = 1

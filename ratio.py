@@ -91,7 +91,6 @@ def ratioSpeech(dict_books):
     ax.set_ylabel("Ratio", fontsize = 40, style = "oblique")
     ax.set_yticklabels(ax.get_yticks() ,fontdict = {'fontsize' : 30})
     plt.xticks(np.arange(min(book_names), max(book_names)+1, 1.0))
-    #ax.set_xticklabels(book_names, fontdict = {'fontsize' : 23, 'fontweight' : 'bold'})
     ax.tick_params('x', labelsize = 25)
     ax.axhline(total_ratio, color="black")
     ax.text(0.71, 0.67, " Overall ratio = 0.43", fontsize = 30, fontweight = 'bold',\

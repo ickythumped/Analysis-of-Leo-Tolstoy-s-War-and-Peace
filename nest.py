@@ -98,25 +98,14 @@ def nestedStructure(file):
     
     ## Creating chapter of paras list
     chapter_paras = [chapter_content[w][0].split("  ") for w in range(0, len(chapter_content))]
-#    chapter_paras = []
-#    for w in range(0, len(chapter_content)):
-#        chapter_paras.append(chapter_content[w][0].split("  "))
     
     ## Creating para of sentences list
     para_sentences = [sent_tokenize(chapter_paras[s][t]) for s in range(0, len(chapter_paras)) \
                       for t in range(0, len(chapter_paras[s]))]
-#    para_sentences = []
-#    for s in range(0, len(chapter_paras)):
-#        for t in range(0, len(chapter_paras[s])):
-#            para_sentences.append(sent_tokenize(chapter_paras[s][t]))
     
     ## Creating sentence of words list
     wordonly_tokenizer = RegexpTokenizer(r'\w+')
     sentence_words = [wordonly_tokenizer.tokenize(u[v]) for u in para_sentences for v in range(0, len(u))]
-#    sentence_words = []      
-#    for u in para_sentences:
-#        for v in range(0, len(u)):
-#            sentence_words.append(wordonly_tokenizer.tokenize(u[v]))
             
     #%% Creating dictionaries
     
