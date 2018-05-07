@@ -5,7 +5,7 @@ File contains the following functions:
                     2. Writes retained Body to a text file 'body_of_text.txt'
 
 """
-
+import sys
 def parseBody(original, parsed):
     filename = original
     body = parsed
@@ -14,7 +14,7 @@ def parseBody(original, parsed):
     flag = 0
     
     try:
-        with open(filename, "r", encoding="UTF8") as file1, open(body, "x", encoding="UTF8") as file2:
+        with open(filename, "r", encoding="UTF8") as file1, open(body, "w", encoding="UTF8") as file2:
             for line in file1:
                 if line == parser_start:
                     flag = 1
@@ -27,5 +27,6 @@ def parseBody(original, parsed):
         print("\n -----------------------------------------------\n")
         
     except IOError:
-        print (body, "file already exists")
+        print (filename, "file doesn't exist")
         print("\n -----------------------------------------------\n")
+        sys.exit(1)
