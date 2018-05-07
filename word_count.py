@@ -60,12 +60,12 @@ def wordFreqAnalysis(dict_books):
      
     #%% Dictionary of word count   
     wordcount = FreqDist(wc for wc in words_lemmatized)
-    
-    # Suppress console temporarily
-    sys.stdout = open(os.devnull, "w")
-    wordcount.tabulate()
-    sys.stdout = sys.__stdout__
-    
+#    print("something")
+#    # Suppress console temporarily
+#    sys.stdout = open(os.devnull, "w")
+    wordcount.tabulate(10)
+#    sys.stdout = sys.__stdout__
+#    print("nothing")
     #%% Write to table (csv file)
     file_freqtable = "word_freq.csv"
     try:
@@ -79,18 +79,18 @@ def wordFreqAnalysis(dict_books):
         print("\n -----------------------------------------------\n")
     
     #%% Word count plot
-    print("Plotting word count")
+    print("Plotting Word Count")
     print("\n -----------------------------------------------\n")
     
-    ttl = "Word Count for Top 75 Words" 
+    ttl = "Word Count for Top 50 Words" 
     plt.figure(figsize = (40, 20))
-    wordcount.plot(75)
-    plt.title(ttl, fontsize = 40)
+    wordcount.plot(50)
+    plt.title(ttl, fontsize = 80)
     #plt.xlabel("Words", fontsize = 26, style = "oblique")
-    plt.ylabel("Counts", fontsize = 26, style = "oblique")
+    plt.ylabel("Frequency of Words", fontsize = 38, style = "oblique")
     ax = plt.gca()
-    ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 20})
-    yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 35000, 4000]
+    ax.set_xticklabels(ax.get_xticklabels(), fontdict = {'fontsize' : 30})
+    yticks = [0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
     ax.set_yticklabels(yticks, fontdict = {'fontsize' : 20})
     plt.show()
     
@@ -106,7 +106,7 @@ def wordFreqAnalysis(dict_books):
     print("\n -----------------------------------------------\n")
     wordCloud.generate_from_frequencies(wordcount)
     plt.figure(figsize = (36, 18))
-    plt.title('Most frequently occurring words (unigrams)', fontsize = 40)
+    plt.title('Most frequently occurring words (unigrams)', fontsize = 60)
     plt.imshow(wordCloud, interpolation='bilinear')
     plt.axis("off")
     plt.show()    
