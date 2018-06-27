@@ -1,5 +1,5 @@
 
-## Folder contains:
+# Folder contains:
 	1. addStopWords.py
 	2. apple_file.txt
 	3. body_praser.py
